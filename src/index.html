@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="UTF-8" />
-    <title>Twitch VOD Watcher!</title>
+    <title>Twitch VOD Watcher</title>
     <link rel="stylesheet" href="css/index.css" />
     <link rel="stylesheet" href="assets/uikit/css/uikit.min.css" />
     <script src="assets/uikit/js/uikit.min.js"></script>
@@ -10,7 +10,7 @@
   </head>
   <body>
     <h1 class="uk-heading-line uk-text-center uk-padding-small">
-      <span>Twitch VOD Viewer</span>
+      <span>Twitch VOD Viewer - v0.1 Alpha</span>
     </h1>
 
     <div class="uk-container-small uk-align-center">
@@ -30,7 +30,9 @@
         </div>
 
         <div class="uk-margin">
-          <label class="uk-form-label" for="vodId">Video ID</label>
+          <label class="uk-form-label" for="vodId"
+            >Twitch Tracker ID <br />
+          </label>
           <div class="uk-form-controls">
             <input
               class="uk-input"
@@ -38,6 +40,13 @@
               type="text"
               placeholder="Video ID"
             />
+            <div class="uk-margin-top">
+              Go to <strong>https://twitchtracker.com</strong> and find the VOD.
+              Place the ID Here.<br />
+              <strong>Example: </strong
+              >https://twitchtracker.com/channel/streams/8902725 so ID is
+              <strong>8902725</strong>
+            </div>
           </div>
         </div>
 
@@ -61,7 +70,7 @@
                 value="download"
                 name="choice"
               />
-              Download</label
+              Download M3U8 File</label
             >
           </div>
         </div>
@@ -76,6 +85,7 @@
     <div id="video-container"></div>
   </body>
   <script src="./utils/hls.js"></script>
+  <script src="./utils/hash.js"></script>
   <script src="./utils/getLink.js"></script>
   <script src="js/main.js"></script>
 </html>

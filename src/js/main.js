@@ -1,6 +1,5 @@
 const btnEl = document.querySelector("#start-button");
 const channelEl = document.querySelector("#channel");
-const choiceEl = document.querySelector("#choice");
 const idEl = document.querySelector("#vodId");
 const videoContainerEl = document.querySelector("#video-container");
 
@@ -30,14 +29,22 @@ const getRadioVal = (form, name) => {
   return val;
 };
 
-btnEl.addEventListener("click", () => {
-  const channel = channelEl.value;
+btnEl.addEventListener("click", async () => {
+  const channel = channelEl.value.toLowerCase().trim().replace(/\s/g, "");
   const id = idEl.value;
   const choice = getRadioVal(document.getElementById("main-form"), "choice");
 
+  const link = await getLink(
+    channel,
+    id,
+    "https://vod-secure.twitch.tv",
+    "/chunked/index-dvr.m3u8"
+  );
+
   if (choice === "stream") {
     videoContainerEl.innerHTML = `<video controls id="video"></video>`;
-    const link = getLink(channel, id);
     initializeVideo(link);
+  } else {
+    window.location.assign(link);
   }
 });

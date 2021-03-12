@@ -1,10 +1,3 @@
-// Imports
-const sha1 = require("./hash");
-const fetch = require("node-fetch");
-
-// Constants
-const { FILECHUNK, DOMAIN } = require("../constants");
-
 const getTimeStampFromResponse = async (channel, id) => {
   // Send Get Request
   const data = await fetch(
@@ -46,10 +39,10 @@ const getFile = (name, vodID, domain, fileChunk, date) => {
   }
 };
 
-const getLink = async (channel, id) => {
-  const timestamp = await getTimeStampFromResponse(CHANNEL, ID);
-  const link = getFile(channel, id, DOMAIN, FILECHUNK, timestamp);
+const getLink = async (channel, id, domain, filechunk) => {
+  const timestamp = await getTimeStampFromResponse(channel, id);
+  const link = getFile(channel, id, domain, filechunk, timestamp);
   return link;
 };
 
-module.exports = { getLink };
+// module.exports = { getLink };
