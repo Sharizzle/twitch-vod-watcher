@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Twitch VOD Watcher!</title>
+    <link rel="stylesheet" href="css/index.css" />
+    <link rel="stylesheet" href="assets/uikit/css/uikit.min.css" />
+    <script src="assets/uikit/js/uikit.min.js"></script>
+    <script src="assets/uikit/js/uikit-icons.min.js"></script>
+  </head>
+  <body>
+    <h1 class="uk-heading-line uk-text-center uk-padding-small">
+      <span>Twitch VOD Viewer</span>
+    </h1>
+
+    <div class="uk-container-small uk-align-center">
+      <form id="main-form" class="uk-form-stacked uk-padding-small">
+        <div class="">
+          <label class="uk-form-label" for="form-horizontal-text"
+            >Channel Name</label
+          >
+          <div class="uk-form-controls">
+            <input
+              id="channel"
+              class="uk-input"
+              type="text"
+              placeholder="Name of Channel"
+            />
+          </div>
+        </div>
+
+        <div class="uk-margin">
+          <label class="uk-form-label" for="vodId">Video ID</label>
+          <div class="uk-form-controls">
+            <input
+              class="uk-input"
+              id="vodId"
+              type="text"
+              placeholder="Video ID"
+            />
+          </div>
+        </div>
+
+        <div class="uk-margin">
+          <div class="uk-form-label">View Method</div>
+          <div class="uk-form-controls uk-form-controls-text">
+            <label
+              ><input
+                class="uk-radio"
+                type="radio"
+                value="stream"
+                name="choice"
+                checked
+              />
+              Stream </label
+            ><br />
+            <label
+              ><input
+                class="uk-radio"
+                type="radio"
+                value="download"
+                name="choice"
+              />
+              Download</label
+            >
+          </div>
+        </div>
+      </form>
+      <button
+        id="start-button"
+        class="uk-button uk-button-secondary uk-width-1-1"
+      >
+        Start
+      </button>
+    </div>
+    <div id="video-container"></div>
+  </body>
+  <script src="./utils/hls.js"></script>
+  <script src="./utils/getLink.js"></script>
+  <script src="js/main.js"></script>
+</html>
