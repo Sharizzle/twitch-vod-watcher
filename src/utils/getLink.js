@@ -27,21 +27,46 @@ const hashAndTruncate = (str) => {
   return sha1(str).substring(0, 20);
 };
 
-const getFile = (name, vodID, domain, fileChunk, date) => {
+const getFile = async (name, vodID, domains, fileChunk, date) => {
   let timestamp = getUnixTime(date);
   const baseString = name + "_" + vodID.toString() + "_" + timestamp.toString();
   try {
     let hash = hashAndTruncate(baseString);
     let finalString = hash + "_" + baseString;
-    return domain + "/" + finalString + fileChunk;
+
+    let links = [];
+    domains.forEach((element) => {
+      links.push(element + "/" + finalString + fileChunk);
+    });
+    const useableLinks = [];
+
+    for (element of links) {
+      try {
+        const data = await fetch(element);
+        const text = await data.text();
+        if (text.includes("EXTINF")) {
+          useableLinks.push(element);
+        }
+      } catch {
+        console.log("error");
+      }
+    }
+
+    return new Promise(function (resolve, reject) {
+      if (useableLinks) {
+        resolve(useableLinks[0]);
+      } else {
+        reject("Link Not Found");
+      }
+    });
   } catch {
-    console.log("An Error has occured");
+    // console.log("An Error has occured");
   }
 };
 
-const getLink = async (channel, id, domain, filechunk) => {
+const getLink = async (channel, id, domains, filechunk) => {
   const timestamp = await getTimeStampFromResponse(channel, id);
-  const link = getFile(channel, id, domain, filechunk, timestamp);
+  const link = await getFile(channel, id, domains, filechunk, timestamp);
   return link;
 };
 

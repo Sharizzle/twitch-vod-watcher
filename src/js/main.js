@@ -33,13 +33,7 @@ btnEl.addEventListener("click", async () => {
   const channel = channelEl.value.toLowerCase().trim().replace(/\s/g, "");
   const id = idEl.value;
   const choice = getRadioVal(document.getElementById("main-form"), "choice");
-
-  const link = await getLink(
-    channel,
-    id,
-    "https://vod-secure.twitch.tv",
-    "/chunked/index-dvr.m3u8"
-  );
+  const link = await getLink(channel, id, DOMAINS, FILECHUNK);
 
   if (choice === "stream") {
     videoContainerEl.innerHTML = `<video controls id="video"></video>`;
