@@ -11,5 +11,3 @@ const DOMAINS = [
   "https://d2aba1wr3818hz.cloudfront.net",
   "https://d3c27h4odz752x.cloudfront.net",
 ];
-
-module.exports = { DOMAIN, DOMAINS, FILECHUNK };

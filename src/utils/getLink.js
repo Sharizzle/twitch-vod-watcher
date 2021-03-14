@@ -39,6 +39,17 @@ const getFile = async (name, vodID, domains, fileChunk, date) => {
       links.push(element + "/" + finalString + fileChunk);
     });
     const useableLinks = [];
+    UIkit.notification({
+      message: "Loading Video from Twitch...",
+      status: "danger",
+      pos: "top-center",
+      timeout: 20000,
+    });
+
+    document.querySelector(".uk-container-small").style.opacity = 0.6;
+    document.querySelector(".uk-heading-line").style.opacity = 0.6;
+
+    document.querySelector(".uk-notification-close").style.opacity = 1;
 
     for (element of links) {
       try {
@@ -46,6 +57,7 @@ const getFile = async (name, vodID, domains, fileChunk, date) => {
         const text = await data.text();
         if (text.includes("EXTINF")) {
           useableLinks.push(element);
+          break;
         }
       } catch {
         console.log("error");
@@ -53,9 +65,20 @@ const getFile = async (name, vodID, domains, fileChunk, date) => {
     }
 
     return new Promise(function (resolve, reject) {
-      if (useableLinks) {
+      if (useableLinks.length >= 1) {
+        document.querySelector(".uk-container-small").style.opacity = 1;
+        document.querySelector(".uk-heading-line").style.opacity = 1;
+        UIkit.notification.closeAll();
         resolve(useableLinks[0]);
       } else {
+        // UIkit.notification.closeAll();
+        UIkit.notification({
+          message: "An Error has Occured! Please try again!",
+          status: "danger",
+          pos: "top-center",
+        });
+        document.querySelector(".uk-container-small").style.opacity = 1;
+        document.querySelector(".uk-heading-line").style.opacity = 1;
         reject("Link Not Found");
       }
     });

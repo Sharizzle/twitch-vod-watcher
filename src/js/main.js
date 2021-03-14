@@ -12,6 +12,8 @@ const initializeVideo = (videoSrc) => {
   } else if (video.canPlayType("application/vnd.apple.mpegurl")) {
     video.src = videoSrc;
   }
+  // document.querySelector(".end").scrollIntoView(false);
+  window.scrollTo(0, document.body.scrollHeight);
 };
 
 const getRadioVal = (form, name) => {
@@ -36,7 +38,7 @@ btnEl.addEventListener("click", async () => {
   const link = await getLink(channel, id, DOMAINS, FILECHUNK);
 
   if (choice === "stream") {
-    videoContainerEl.innerHTML = `<video controls id="video"></video>`;
+    videoContainerEl.innerHTML = `<video controls id="video"></video><div class="end"></div>`;
     initializeVideo(link);
   } else {
     window.location.assign(link);
