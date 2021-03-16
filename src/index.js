@@ -12,6 +12,7 @@ const createWindow = () => {
   const mainWindow = new BrowserWindow({
     webPreferences: {
       nodeIntegration: true,
+      icon: path.join(app.getAppPath(), "assets/icons/256x256"),
     },
     width: 570,
     height: 625,

@@ -1,13 +1,15 @@
 {
   "name": "twitch-vod-watcher",
-  "productName": "twitch-vod-watcher",
-  "version": "1.0.0",
+  "productName": "Twitch Vod Watcher v1.2",
+  "version": "1.2.0",
   "description": "My Electron application description",
   "main": "src/index.js",
   "scripts": {
     "start": "electron-forge start",
     "package": "electron-forge package",
     "make": "electron-forge make",
+    "make-mac": "npx @electron-forge/cli make --platform darwin",
+    "make-linux": "npx @electron-forge/cli make --platform linux --targets deb",
     "publish": "electron-forge publish",
     "lint": "echo \"No linting configured\""
   },
@@ -35,7 +37,9 @@
         },
         {
           "name": "@electron-forge/maker-deb",
-          "config": {}
+          "config": {
+            "icon": "./assets/icons/png/256x256.png"
+          }
         },
         {
           "name": "@electron-forge/maker-rpm",
