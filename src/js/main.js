@@ -37,6 +37,10 @@ btnEl.addEventListener("click", async () => {
   const choice = getRadioVal(document.getElementById("main-form"), "choice");
   const link = await getLink(channel, id, DOMAINS, FILECHUNK);
 
+  const linkSource = document.querySelector("#link-source");
+  linkSource.removeAttribute("hidden");
+  linkSource.children[2].innerHTML = link;
+
   if (choice === "stream") {
     videoContainerEl.innerHTML = `<video controls id="video"></video><div class="end"></div>`;
     initializeVideo(link);

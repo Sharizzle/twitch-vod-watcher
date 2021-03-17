@@ -37,6 +37,9 @@
         },
         {
           "name": "@electron-forge/maker-deb",
+          "platforms": [
+            "linux"
+          ],
           "config": {
             "icon": "./assets/icons/png/256x256.png"
           }
